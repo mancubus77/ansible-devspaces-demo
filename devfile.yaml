@@ -119,6 +119,7 @@ events:
 #  preStart:
 #    - init-project
   postStart:
-    - init-project
+    - install-paramiko
+    - install-collection
 #  preStop:
 #    - "molecule-destroy"
