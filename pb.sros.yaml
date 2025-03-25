@@ -1,0 +1,25 @@
+---
+- name: Sample SROS playbook
+  hosts: sros
+  gather_facts: true
+  connection: network_cli
+  vars:
+    ansible_user: "{{ username }}"
+    ansible_password: "{{ password }}"
+  # Prompt Username and Password
+  vars_prompt:
+    - name: username
+      prompt: User
+      private: false
+    - name: password
+      prompt: Password
+
+  tasks:
+    - name: Gateher facts from devices
+      nokia.sros.device_info:
+      register: device_info
+
+    - name: Display device info
+      ansible.builtin.debug:
+        msg: |
+          {{ device_info | to_nice_json }}

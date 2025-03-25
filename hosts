@@ -2,9 +2,14 @@
 r01 ansible_host=192.168.100.30
 
 [sros]
-sr01 ansible_host=192.168.100.30
+sr01 ansible_host=192.168.100.31
 
 [cisco:vars]
 ansible_become=yes
 ansible_become_method=enable
 ansible_network_os=cisco.ios.ios
+
+[sros:vars]
+ansible_connection=network_cli
+ansible_network_os=nokia.sros.classic
+ansible_ssh_common_args="-oHostKeyAlgorithms=+ssh-rsa"

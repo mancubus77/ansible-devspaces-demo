@@ -108,18 +108,19 @@ commands:
   - id: install-paramiko
     exec:
       component:  tooling-container
-      commandLine: 'pip3 install paramiko'
+      commandLine: 'pip3 install paramiko ansible-pylibssh'
       workingDir: $PROJECTS_ROOT
-  - id: install-collection
+  - id: install-collections
     exec:
       component:  tooling-container
-      commandLine: 'ansible-galaxy collection install cisco.ios'
+      commandLine: 'ansible-galaxy collection install cisco.ios nokia.sros'
       workingDir: $PROJECTS_ROOT
+
 events:
 #  preStart:
 #    - init-project
   postStart:
     - install-paramiko
-    - install-collection
+    - install-collections
 #  preStop:
 #    - "molecule-destroy"
