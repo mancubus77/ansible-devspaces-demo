@@ -1,8 +1,12 @@
-- hosts: cisco
+- name: Sample Cisco playbook
+  hosts: cisco
   gather_facts: true
+  connection: network_cli
+  # Read Username and Password from prompta
   vars:
-    ansibe_user: "{{ username }}"
-    ansibe_password: "{{ password }}"
+    ansible_user: "{{ username }}"
+    ansible_password: "{{ password }}"
+  # Prompt Username and Password
   vars_prompt:
     - name: username
       prompt: User
@@ -12,13 +16,14 @@
       prompt: Password
 
   tasks:
-
-
+    # Run commands on Cisco Router
     - name: Gather Cisco facts
-      cisco.ios.ios_commands:
-        - show version
-        - show interfaces berief
-    
+      cisco.ios.ios_command:
+        commands:
+          - show version
+          - show interfaces
+      register: out
+    # Print commands output
     - name: Print a message
       ansible.builtin.debug:
-        msg: 'Logging in as {{ username }}'
+        msg: "{{ out.stdout[0] }}"
