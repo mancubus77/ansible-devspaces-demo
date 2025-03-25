@@ -1,8 +1,10 @@
 [cisco]
-ansible_host=192.168.100.30
+r01 ansible_host=192.168.100.30
 
 [sros]
-ansible_host=192.168.100.30
+sr01 ansible_host=192.168.100.30
 
-[all:vars]
-ansible_user=admin
+[cisco:vars]
+ansible_become=yes
+ansible_become_method=enable
+ansible_network_os=cisco.ios.ios

@@ -1,0 +1,24 @@
+- hosts: cisco
+  gather_facts: true
+  vars:
+    ansibe_user: "{{ username }}"
+    ansibe_password: "{{ password }}"
+  vars_prompt:
+    - name: username
+      prompt: User
+      private: false
+
+    - name: password
+      prompt: Password
+
+  tasks:
+
+
+    - name: Gather Cisco facts
+      cisco.ios.ios_commands:
+        - show version
+        - show interfaces berief
+    
+    - name: Print a message
+      ansible.builtin.debug:
+        msg: 'Logging in as {{ username }}'
