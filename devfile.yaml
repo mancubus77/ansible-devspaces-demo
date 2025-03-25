@@ -105,12 +105,12 @@ commands:
   - id: init-project
     apply:
       component: tools
-  - id: install paramiko
+  - id: install-paramiko
     exec:
       component: tools
       commandLine: 'pip3 install pakamiko'
       workingDir: $PROJECTS_ROOT
-  - id: install paramiko
+  - id: install-collection
     exec:
       component: tools
       commandLine: 'ansible-galaxy collection install cisco.ios'
