@@ -4,6 +4,20 @@ metadata:
   name: ansible-demo
 components:
   - name: tooling-container
+    attributes:
+      che-theia.eclipse.org/vscode-extensions:
+        - 'relative:extension/resources/github_com/microsoft/vscode-python/releases/download/2020_7_94776/ms-python-release.vsix'
+      che-theia.eclipse.org/vscode-preferences:
+        python.globalModuleInstallation: true
+      pod-overrides:
+        metadata:
+          annotations:
+              k8s.v1.cni.cncf.io/networks: |
+                [
+                  {
+                    "name": "br-eve"
+                  }
+                ]      
     container:
       image: ghcr.io/ansible/ansible-devspaces@sha256:a28fa23d254ff1b3ae10b95a0812132148f141bda4516661e40d0c49c4ace200 # v24.10.2
       memoryRequest: 256M
