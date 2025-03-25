@@ -108,7 +108,7 @@ commands:
   - id: install-paramiko
     exec:
       component: tools
-      commandLine: 'pip3 install pakamiko'
+      commandLine: 'pip3 install paramiko'
       workingDir: $PROJECTS_ROOT
   - id: install-collection
     exec:
@@ -116,9 +116,11 @@ commands:
       commandLine: 'ansible-galaxy collection install cisco.ios'
       workingDir: $PROJECTS_ROOT
 events:
-  preStart:
+#  preStart:
+#    - init-project
+  postStart:
     - init-project
-#  postStart:
-#    - pre-compile-cmd
-  preStop:
-    - "molecule-destroy"
+    - install-paramiko
+    - install-collection
+#  preStop:
+#    - "molecule-destroy"
